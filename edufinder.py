@@ -1,4 +1,4 @@
-def filter_edu(emails: list[str]) -> list[str]
+def filter_edu(emails: list[str]) -> list[str]:
     """
     Filters a list of email addresses to keep only those that end in msu.edu
 
