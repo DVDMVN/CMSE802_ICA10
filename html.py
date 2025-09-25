@@ -14,7 +14,7 @@ def load_html(source: str) -> str:
 
     if not isinstance(source, str) or not source.strip():
         raise TypeError("Source must be a non-empty string.")
-    if source.startswith('http://, https://'):
+    if source.startswith(('http://', 'https://')):
         response = requests.get(source, timeout = 200)
         response.raise_for_status()  # Raise an error for bad responses
         return response.text
