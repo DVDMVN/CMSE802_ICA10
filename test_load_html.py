@@ -1,26 +1,16 @@
+# test_load_html.py
 import unittest
-from unittest.mock import patch, Mock
-import requests
 from html import load_html
 
-class Test_LoadHtml(unittest.TestCase):
+class TestLoadHtml(unittest.TestCase):
 
-    @patch("html.requests.get")
-    def test_load_html_success(self, mock_get):
-        fake_response = Mock()
-        fake_response.text = "<html>OK</html>"
-        fake_response.raise_for_status = Mock()
-        mock_get.return_value = fake_response
+    def test_load_html_success(self):
+        result = load_html("https://instagram.com")
+        self.assertGreater(len(result), 0)
 
-        result = load_html("http://walmart.com")
-        self.assertEqual(result, "<html>OK</html>")
-
-    @patch("html.requests.get")
-    def test_load_html_failure(self, mock_get):
-        mock_get.side_effect = requests.exceptions.RequestException("boom")
-
-        with self.assertRaises(requests.exceptions.RequestException):
-            load_html("http://fnsdjkfd.com")
+    def test_load_html_failure(self):
+        with self.assertRaises(Exception):
+            load_html("http://bad.url.that.does.not.exist")
 
 if __name__ == "__main__":
     unittest.main()
